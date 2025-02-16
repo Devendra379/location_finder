@@ -1,6 +1,8 @@
 from flask import *
 import requests
 from nearby import get_nearby_sorted_places
+import os
+
 
 app = Flask(__name__)
 app.config['WTF_CSRF_ENABLED'] = False  # Disable CSRF for simplicity
@@ -22,4 +24,5 @@ def location_fetch_post(*location):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))  # Render provides PORT dynamically
+    app.run(host="0.0.0.0", port=port)
